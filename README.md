@@ -33,8 +33,11 @@ The datas that our user provides us are stored in encrypted format to which only
 <h1>User Contacts : </h1>
 <br>
     1. click on eye icon to see the decrypted details of particular contact  
+    <br>
     2. click on edit icon to edit the details of particular contact  
+    <br>
     3. click on delete icon to delete the particular contact  
+    <br>
     4. You can directly search your contacts from the search provided at the top
 
 ![image](https://user-images.githubusercontent.com/53347922/111900675-eabe6200-8a59-11eb-90fe-a048d266bf2c.png)
@@ -49,11 +52,12 @@ you will be not allowed to enjoy any of our services. :(
 
 <h2>User Profile Page</h2>
 <br>    1. can't edit anymore :(
+<br>
 
 ![image](https://user-images.githubusercontent.com/53347922/111900855-d464d600-8a5a-11eb-8985-f5240886e655.png)
 
 <h2>User contact Page : Enjoy the encrypted data :)</h2>
-<br>    1.can't edit,view,delete the contacts :(
+<br>    1.can't edit,view,delete the contacts :(<br>
 
 ![image](https://user-images.githubusercontent.com/53347922/111900884-fc543980-8a5a-11eb-9278-750026b2e41d.png)
 
