@@ -6,7 +6,7 @@ Security is the main reason that makes this website different from others.
 
 The datas that our user provides us are stored in encrypted format to which only they can access or decrypt their own data by themselves.
 
-<h1 style="color:blue">Home page</h1>
+<h1>Home page</h1>
 
 ![image](https://user-images.githubusercontent.com/53347922/111899810-c1e79e00-8a54-11eb-882c-910e6a0b7f6d.png)
 ![image](https://user-images.githubusercontent.com/53347922/111899834-f65b5a00-8a54-11eb-910a-be61be58cbe1.png)
