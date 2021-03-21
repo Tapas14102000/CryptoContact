@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title th:text="${title}">Insert title here</title>
+</head>
+<body>
+	<section>
+		<div class="card mr-3 mt-3">
+			<div th:if="${session.message}" class="container mt-3">
+				<div th:classappend="${'alert-'+session.message.type}"
+					class="alert text-center" role="alert"
+					th:text="${session.message.content}"></div>
+				<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+			</div>
+
+			<div class="card-body">
+				<h1 class="text-center">Update Contact</h1>
+				<div class="container-fluid mt-1">
+					<div class="row">
+						<div class="col-md-10 offset-md-1">
+							<form action="#" th:object="${contact}"
+								enctype="multipart/form-data" method="post"
+								th:action="@{/user/process-update}" class="mt-2">
+								<!-- photo -->
+								<div class="container text-center">
+									<img style="width: 250px; height: 250px;"
+										th:if="${contact.image}!='contact.png'"
+										class="img-fluid profile_picture mt-3" src=""
+										th:src="@{'/img/'+${contact.cId}+${contact.image}}"> <img
+										style="width: 250px; height: 250px;"
+										th:if="${contact.image}=='contact.png'"
+										class="img-fluid profile_picture mt-3" src=""
+										th:src="@{'/img/'+${contact.image}}">
+								</div>
+								<div class="custom-file mt-3 mb-3 text-center">
+									<label>Upload Photo</label> <br> <input type="file"
+										name="profileImage">
+								</div>
+
+								<!-- First Name -->
+								<input type="hidden" name="cId" th:value="${contact.cId}">
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text ">
+											<i class="fas fa-signature p-1"></i>
+										</div>
+									</div>
+									<input required type="text" id="firstName" name="name"
+										th:value="${contact.name}" placeholder="Enter First Name"
+										class="form-control" />
+								</div>
+
+								<!-- Second Name -->
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text ">
+											<i class="fas fa-signature p-1"></i>
+										</div>
+									</div>
+									<input required type="text" id="secondName" name="secondName"
+										th:value="${contact.secondName}"
+										placeholder="Enter Second Name" class="form-control" />
+								</div>
+
+
+								<!-- Phone -->
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text ">
+											<i class="fas fa-phone p-1"></i>
+										</div>
+									</div>
+									<input required min=1111111111 max=9999999999 type="number"
+										id="phone" name="phone" th:value="${contact.phone}"
+										placeholder="Enter Contact Number" class="form-control" />
+								</div>
+
+
+								<!-- email -->
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text ">
+											<i class="fas fa-at p-1"></i>
+										</div>
+									</div>
+									<input required type="email" id="email" name="email"
+										placeholder="Enter Mail Id" th:value="${contact.email}"
+										class="form-control" />
+								</div>
+
+								<!-- work -->
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text ">
+											<i class="fas fa-briefcase p-1"></i>
+										</div>
+									</div>
+									<input required type="text" id="work" name="work"
+										placeholder="Enter Work" th:value="${contact.work}"
+										class="form-control" />
+								</div>
+
+								<!-- About yourself -->
+								<div class="form-group mt-3">
+									<textarea required th:text="${contact.description}"
+										name="description" id="description"
+										placeholder="Enter Something about him/her..."
+										class="form-control" rows="5"></textarea>
+								</div>
+
+								<div class="container text-center mt-3 mb-3">
+									<button class="btn btn-outline-primary">Update Contact</button>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

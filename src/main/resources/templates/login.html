@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf,org" th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title th:text="${title}">Insert title here</title>
+<link href='https://use.fontawesome.com/releases/v5.8.1/css/all.css'>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
+<link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+</head>
+<body>
+<section>
+
+<div class="container my-3">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+            <div class="my-card mt-2 text-center">
+            <div class="container text-center">
+							<img style="width: 150px;height: 150px;" th:src="@{/img/contact.png}">
+						</div>
+						 <h1 style="color: black;">Login</h1>
+						  <div th:if="${param.error}" class="alert alert-danger">
+                    Invalid Username and Password
+                    </div>
+                     <div th:if="${param.logout}" class="alert alert-success">
+                    You have been logged out.
+                    </div>
+                    <div th:if="${param.change}" class="alert alert-success">
+                    <p th:text="${param.change}"></p>
+                    </div>
+                <form class="box" th:action="@{/doLogin}" action="#" method="post" style="padding-left: 20px; padding-right: 20px;">
+                      
+                    
+                    <p class="text-muted"> Please enter your login and password!</p> 
+                    <div class="form-group">
+                    <input type="text" name="username" style="color: black" placeholder="Username"> 
+                    </div>
+                    <div class="form-group">
+                    <input type="password" name="password" style="color: black" placeholder="Password"> 
+                    </div>
+                    <div class="container text-center mt-3">
+                    <a class="forgot text-muted" href="#" th:href="@{/verify}">Forgot password?</a> 
+                    <input type="submit" name="submit" value="Login">
+                    <p class="text-muted">Not have an account?</p>
+                    <a class="btn btn-outline-primary" th:href="@{/signup}" id="register">Register Now !</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+</body>
+</html>

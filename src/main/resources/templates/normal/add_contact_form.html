@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title th:text="${title}">Insert title here</title>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+	crossorigin="anonymous">
+</head>
+<body>
+	<section>
+		<div class="card mr-3 mt-3" th:if="${session.key}">
+			<div th:if="${session.message}" class="container mt-3">
+				<div th:classappend="${'alert-'+session.message.type}"
+					class="alert text-center" role="alert"
+					th:text="${session.message.content}"></div>
+				<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+			</div>
+
+			<div class="card-body">
+				<h1 class="text-center">Add Contact</h1>
+				<div class="container-fluid mt-1">
+					<div class="row">
+						<div class="col-md-10 offset-md-1">
+							<form action="#" th:object="${contact}"
+								enctype="multipart/form-data" method="post"
+								th:action="@{/user/process-contact}" class="mt-2">
+								<!-- First Name -->
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text ">
+											<i class="fas fa-signature p-1"></i>
+										</div>
+									</div>
+									<input required type="text" id="firstName" name="name"
+										placeholder="Enter First Name" class="form-control" />
+								</div>
+
+								<!-- Second Name -->
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text ">
+											<i class="fas fa-signature p-1"></i>
+										</div>
+									</div>
+									<input required type="text" id="secondName" name="secondName"
+										placeholder="Enter Second Name" class="form-control" />
+								</div>
+
+
+								<!-- Phone -->
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text ">
+											<i class="fas fa-phone p-1"></i>
+										</div>
+									</div>
+									<input required min=1111111111 max=9999999999 type="number"
+										id="phone" name="phone" placeholder="Enter Contact Number"
+										class="form-control" />
+								</div>
+
+
+								<!-- email -->
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text ">
+											<i class="fas fa-at p-1"></i>
+										</div>
+									</div>
+									<input required type="email" id="email" name="email"
+										placeholder="Enter Mail Id" class="form-control" />
+								</div>
+
+								<!-- work -->
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text ">
+											<i class="fas fa-briefcase p-1"></i>
+										</div>
+									</div>
+									<input required type="text" id="work" name="work"
+										placeholder="Enter Work" class="form-control" />
+								</div>
+
+								<!-- About yourself -->
+								<div class="form-group mt-3">
+									<textarea required name="description" id="description"
+										placeholder="Enter Something about him/her..."
+										class="form-control" rows="5"></textarea>
+								</div>
+
+								<!-- photo -->
+								<!-- 
+<div class="custom-file mt-3">
+<label>Upload Photo</label>
+<br>
+<input type="file" name="profileImage">
+</div>
+ -->
+								<div class="container text-center mt-3 mb-3">
+									<button class="btn btn-outline-primary">Save Contact</button>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card my-5">
+			<div class="container text-center mt-5 mb-5"
+				th:unless="${session.key}">
+				<p class="bg-danger text-white">Invalid Secret key - you are not
+					allowed to add contacts</p>
+			</div>
+		</div>
+		<script>
+$(document).ready(()=>{
+	$(".item").removeClass("active1");
+	$("#add-link").addClass("active1");
+});
+</script>
+	</section>
+	<script type="text/javascript" th:src="@{/JS/script.js}"></script>
+</body>
+</html>

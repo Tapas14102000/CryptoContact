@@ -1,0 +1,173 @@
+@charset "ISO-8859-1";
+body {
+	background: #e2e2e2!important;
+}
+.bg-primary{
+	background: #0275d8 !important;
+}
+.banner{
+	width:100%;
+	height:93vh;
+	background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)) ,url("../img/banner.gif");
+	color:white;
+	background-size: cover;
+}
+.my-card{
+	padding: 10px;
+	background:#FFFFFF;
+}
+
+.box {
+    background: white;
+    transition: 0.25s;
+}
+
+.box input[type="text"],
+.box input[type="password"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 10px 10px;
+    width: 250px;
+    outline: none;
+    color: black;
+    border-radius: 24px;
+    transition: 0.25s
+}
+
+.box h1 {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500
+}
+
+.box input[type="text"]:hover,
+.box input[type="password"]:hover {
+    width: 300px;
+    border-color: #2ecc71
+}
+
+.box input[type="submit"]{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline: none;
+    color: black;;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer
+}
+
+.box input[type="submit"]:hover  {
+	color:white;
+    background: #2ecc71
+}
+
+.forgot {
+    text-decoration: underline
+}
+
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+ 
+.sidebar a.active {
+  background-color: #0275d8;
+  color: white;
+}
+
+.sidebar a:focus{
+	background-color: #0275d8;
+  	color: white;
+}
+
+.sidebar a:hover {
+  background-color: #0275d8;
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+.sidebar .divider{
+	height: .5px;
+	width:100%;
+	background: #e2e2e2;
+	margin-top: 10px;
+}
+
+.my_profile_picture{
+	width: 40px;
+	height: 40px;
+	object-fit:cover;
+	border-radius: 30%;
+}
+.my_profile_picture:hover{
+	transform: scale(3) rotateY(180deg);
+	transition:0.8s;
+}
+.profile_picture{
+	width: 200px;
+	height: 200px;
+	object-fit:cover;
+	border-radius: 50%;
+}
+
+.search-container{
+	position: relative;
+}
+
+.search-result{
+	position: absolute;
+	background: white;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid gray;
+	display: none;
+}
+
+.active1 {
+background: #0275d8;
+color: white;
+}

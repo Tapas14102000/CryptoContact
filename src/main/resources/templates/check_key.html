@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf,org" th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title th:text="${title}">Insert title here</title>
+<link href='https://use.fontawesome.com/releases/v5.8.1/css/all.css'>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
+<link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+</head>
+<body>
+<section>
+<div class="container my-5 text-center" style="padding-top: 150px;">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+            <div class="my-card mt-2 text-center" style="padding-top: 20px;">
+            <div class="container text-center">
+              <div class="alert alert-warning" role="alert">
+  <p>Invalid Key will not allow you to explore our features</p>
+  <p> i.e. can't add more contacts,can't update contacts</p>
+</div>
+
+              <form  method="post" action="#" th:action="@{/user/check-key}">
+              <div class="form-group">
+              <input required type="password" name="key" placeholder="Enter SecretKey here to decrypt your data" class="form-control">
+              </div>
+              <div class="container my-3">
+              <button type="submit" class="btn btn-outline-success">Decrypt</button>
+              </div>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+</body>
+</html>

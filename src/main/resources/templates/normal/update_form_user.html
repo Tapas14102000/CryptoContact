@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title th:text="${title}">Insert title here</title>
+</head>
+<body>
+<section>
+<div class="card mr-3 mt-3">
+<div th:if="${session.message}" class="container mt-3">
+<div th:classappend="${'alert-'+session.message.type}" class="alert text-center" role="alert" th:text="${session.message.content}"></div>
+<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+</div>
+              
+<div class="card-body">
+<h1 class="text-center">Update Contact</h1>
+<div class="container-fluid mt-1">
+<div class="row">
+<div class="col-md-10 offset-md-1">
+<form action="#" th:object="${user}" enctype="multipart/form-data" method="post" th:action="@{/user/process-update-user}" class="mt-2">
+<!-- photo -->
+<div class="container text-center">
+<img style="width: 250px;height: 250px;"th:if="${user.imageUrl}!='contact.png'" class="img-fluid profile_picture mt-3" src="" th:src="@{'/img/'+${user.id}+${user.imageUrl}}">
+<img style="width: 250px;height: 250px;"th:if="${user.imageUrl}=='contact.png'" class="img-fluid profile_picture mt-3" src="" th:src="@{'/img/'+${user.imageUrl}}">
+</div>
+<div class="custom-file mt-3 mb-3 text-center">
+<label>Upload Photo</label>
+<br>
+<input type="file" name="profileImages">
+</div>
+
+<!-- First Name -->
+<input type="hidden" name="cId" th:value="${user.id}">
+<div class="input-group mb-3">
+<div class="input-group-prepend">
+<div class="input-group-text ">
+<i class="fas fa-signature p-1"></i>
+</div>
+</div>
+<input required type="text" id="firstName" name="name" th:value="${user.name}" placeholder="Enter Name" class="form-control"/>
+</div>
+
+
+<!-- email -->
+<div class="input-group mb-3">
+<div class="input-group-prepend">
+<div class="input-group-text ">
+<i class="fas fa-at p-1"></i>
+</div>
+</div>
+<input disabled required type="email" id="email" name="email" placeholder="Enter Mail Id" th:value="${user.email}" class="form-control"/>
+</div>
+
+
+<!-- About yourself -->
+<div class="form-group mt-3">
+<textarea required th:text="${user.about}" name="about" id="description" placeholder="Enter Something about him/her..." class="form-control" rows="5"></textarea>
+</div>
+
+<div class="container text-center mt-3 mb-3">
+<button class="btn btn-outline-primary">Update Me</button>
+</div>
+
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</body>
+</html>
