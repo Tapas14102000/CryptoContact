@@ -31,6 +31,7 @@ User Profile Page : click on edit icon to edit your(user) details
 ![image](https://user-images.githubusercontent.com/53347922/111900086-73d39a00-8a56-11eb-873c-5142656f1d62.png)
 
 User Contacts : 
+<br>
     1. click on eye icon to see the decrypted details of particular contact  
     2. click on edit icon to edit the details of particular contact  
     3. click on delete icon to delete the particular contact  
@@ -67,8 +68,4 @@ Payment Integration : Donate us without any hesitation because we believe in our
 Thanks for your contribution :)
 
 ![image](https://user-images.githubusercontent.com/53347922/111901209-8fda3a00-8a5c-11eb-8821-9639fd718ef5.png)
-
-
-
-
 
