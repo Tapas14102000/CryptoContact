@@ -24,6 +24,13 @@ public class Contact {
 	private String image;
 	@Column(length = 10000)
 	private String description;
+	private boolean added;
+	public boolean isAdded() {
+		return added;
+	}
+	public void setAdded(boolean added) {
+		this.added = added;
+	}
 	@ManyToOne
 	@JsonIgnore
 	private User user;

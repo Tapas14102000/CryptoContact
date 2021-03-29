@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="normal/base::layout(~{::section})">
+	th:replace="base::layout(~{::section})">
 <head>
 <meta charset="ISO-8859-1">
 <title th:text="${title}">Insert title here</title>
@@ -18,14 +18,15 @@
 					th:text="${session.message.content}"></div>
 				<th:block th:text="${#session.removeAttribute('message')}"></th:block>
 			</div>
-			<div class="card-body">
-				<h1 class="text-center">Add Contact</h1>
+
+			<div class="card-body" th:if="${session.name}">
+				<h1 class="text-center">Request Form</h1>
 				<div class="container-fluid mt-1">
 					<div class="row">
 						<div class="col-md-10 offset-md-1">
 							<form action="#" th:object="${contact}"
 								enctype="multipart/form-data" method="post"
-								th:action="@{/user/process-contact}" class="mt-2">
+								th:action="@{/process-contact}" class="mt-2">
 								<!-- First Name -->
 								<div class="input-group mb-3">
 									<div class="input-group-prepend">
@@ -100,34 +101,20 @@
 </div>
  -->
 								<div class="container text-center mt-3 mb-3">
-									<button class="btn btn-outline-primary">Save Contact</button>
+									<button class="btn btn-outline-primary">Send Request</button>
 								</div>
 
 							</form>
 						</div>
 					</div>
 				</div>
-				<div class="text-center">
-					<label>Share this URL to make more contacts :</label>
-					<p>Check Request Section to manage requests</p>
-					<div th:text="|http://localhost:1200/${email}/sendrequest|"
-						class="text-info"></div>
-				</div>
 			</div>
 		</div>
-		<div class="card my-5">
-			<div class="container text-center mt-5 mb-5"
-				th:unless="${session.key}">
-				<p class="bg-danger text-white">Invalid Secret key - you are not
-					allowed to add contacts</p>
+		<div class="card my-5" th:unless="${session.name}">
+			<div class="container text-center mt-5 mb-5">
+				<p class="bg-danger text-white">Invalid URL</p>
 			</div>
 		</div>
-		<script>
-$(document).ready(()=>{
-	$(".item").removeClass("active1");
-	$("#add-link").addClass("active1");
-});
-</script>
 	</section>
 	<script type="text/javascript" th:src="@{/JS/script.js}"></script>
 </body>

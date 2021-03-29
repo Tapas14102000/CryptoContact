@@ -1,7 +1,6 @@
 package com.smart.entities;
 
 import java.util.ArrayList;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,31 +10,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
 import java.util.List;
 
 @Entity
 @Table(name = "USER")
 public class User {
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
-				+ ", enabled=" + enabled + ", imageUrl=" + imageUrl + ", about=" + about + ", contacts=" + contacts
-				+ "]";
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@NotBlank(message = "Name is required")
-	@Size(min = 3,max = 30,message = "Minimum 2 and maximum 30 characters are required.")
+	@Size(min = 3, max = 30, message = "Minimum 2 and maximum 30 characters are required.")
 	private String name;
 	@NotBlank(message = "Email is required")
 	@Column(unique = true)
-	//@Email(regexp="^[a-z0-9+_.-]+@[a-z0-9.-]+$",message = "Enter a valid mail ID")
+	// @Email(regexp="^[a-z0-9+_.-]+@[a-z0-9.-]+$",message = "Enter a valid mail
+	// ID")
 	private String email;
 	@NotBlank(message = "Password is required")
 	private String password;
@@ -44,8 +35,16 @@ public class User {
 	private String imageUrl;
 	@Column(length = 500)
 	private String about;
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")
-	private List<Contact> contacts=new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+	private List<Contact> contacts = new ArrayList<>();
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
+				+ ", enabled=" + enabled + ", imageUrl=" + imageUrl + ", about=" + about + ", contacts=" + contacts
+				+ "]";
+	}
+
 	public int getId() {
 		return id;
 	}

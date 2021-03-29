@@ -11,11 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.EmailService;
+import com.smart.dao.UserRepository;
+import com.smart.dao.contactRepository;
+import com.smart.entities.Contact;
 import com.smart.entities.User;
 import com.smart.helper.Message;
 
@@ -25,11 +29,57 @@ public class HomeController {
 	private BCryptPasswordEncoder bcrypt;
 	@Autowired
 	private EmailService emailService;
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private contactRepository contactRepository;
 	@RequestMapping("/")
 	public String home(Model m) {
 		m.addAttribute("title","Home-Smart Contact Manager");
 		return "home";
 	}
+	@RequestMapping("/{name}/sendrequest")
+	public String sendRequest(@PathVariable("name")String name,HttpSession session) {
+		session.removeAttribute("name");
+		System.out.println("name = "+name);
+		User user=this.userRepository.getUserByUserName(name);
+		System.out.println(user);
+		if(user!=null)
+		session.setAttribute("name", name);
+		return "sendRequest";
+	}
+	
+	//request handle
+	@PostMapping("/process-contact")
+	public String processContact(@Valid @ModelAttribute Contact contact,Model m,HttpSession session) {
+		session.removeAttribute("message");
+		String name = null;
+		try {
+			StrongTextEncryptor ste=new StrongTextEncryptor();
+			ste.setPassword((String)session.getAttribute("key"));
+			name=session.getAttribute("name").toString();
+		User user=this.userRepository.getUserByUserName(name);
+		contact.setUser(user);
+		System.out.println("contact.getPhone() : "+contact.getPhone());
+		System.out.println("key = "+(String)session.getAttribute("key"));
+		Contact con=this.contactRepository.findByPhoneContainingAndUser(ste.encrypt(contact.getPhone()), user);
+		if(con!=null)
+			throw new Exception("Same Contact Found");
+		//processing and uploading file
+			contact.setImage("contact.png");
+			contact.setAdded(false);
+		user.getContacts().add(contact);
+		this.userRepository.save(user);
+		session.setAttribute("message", new Message("Request Sent Successfully", "success"));
+		}
+		catch(Exception e) {
+			session.setAttribute("message", new Message("Same Contact Found", "danger"));	
+		}
+		System.out.println("redirect:/"+name+"/sendRequest");
+		return "redirect:/"+name+"/sendrequest";
+	}
+
+	
 	@RequestMapping("/about")
 	public String about(Model m) {
 		m.addAttribute("title","About-Smart Contact Manager");
@@ -132,5 +182,6 @@ public class HomeController {
 		System.out.println("hello");
 		return "redirect:/";
 	}
+	
 	
 }

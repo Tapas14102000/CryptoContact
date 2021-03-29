@@ -13,10 +13,16 @@ import com.smart.entities.User;
 
 public interface contactRepository extends JpaRepository<Contact, Integer> {
 //pagination
-	@Query("from Contact as c where c.user.id =:userId")
+	@Query("from Contact as c where c.user.id =:userId and c.added = 1")
 	// current page-page
 	// contact per page-5
 	public Page<Contact> findContactByUser(@Param("userId") int userId, Pageable pageable);
+	
+	//pagination
+		@Query("from Contact as c where c.user.id =:userId and c.added = 0")
+		// current page-page
+		// contact per page-5
+		public Page<Contact> findContactByUserRequest(@Param("userId") int userId, Pageable pageable);
 
 	// search
 	public List<Contact> findByNameContainingAndUser(String name, User user);

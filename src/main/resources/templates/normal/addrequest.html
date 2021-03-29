@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<meta charset="ISO-8859-1">
+<title th:text="${title}">Insert title here</title>
+</head>
+<body>
+<section>
+	<div class="card mr-3 mt-4">
+		
+<div th:if="${session.message}" class="container mt-3">
+<div th:classappend="${'alert-'+session.message.type}" class="alert text-center" role="alert" th:text="${session.message.content}"></div>
+<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+</div>
+<div th:unless="${session.key}"  class="container mt-3 text-center">
+					<p class="bg-danger text-white">Invalid Secret Key - Data can't be Decrypted </p>
+					</div>
+		<div class="card-body" th:if="${totalPages != 0}">
+			<h1 class="text-center">
+			Contact Requests</h1>
+			
+		<div class="table-responsive">
+			<table class="table table-hover table-responsive">
+			  <thead>
+			    <tr>
+			      <th scope="col" class="text-center">#Id</th>
+			      <th scope="col" class="text-center"></th>
+			      <th scope="col" class="text-center">First Name</th>
+			      <th scope="col" class="text-center">Last Name</th>
+			      <th scope="col" class="text-center">Email</th>
+			      <th scope="col" class="text-center">Phone</th>
+			      <th scope="col" class="text-center" colspan="3" th:if="${session.key}">Action</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr th:each="c : ${contacts}">
+			      <th class="text-center" scope="row" th:text="${'SCM2021'+c.cId}">1</th>
+			      <td class="text-center" th:if="${c.image}!='contact.png'"><img alt="profile photo" src="#" class="my_profile_picture" th:src="@{'/img/'+${c.cId}+${c.image}}"></td>
+			      <td class="text-center" th:if="${c.image}=='contact.png'"><img alt="profile photo" src="#" class="my_profile_picture" th:src="@{'/img/'+${c.image}}"></td>
+			      <td class="text-center" th:text="${c.name}"></td>
+			      <td class="text-center" th:text="${c.secondName}"></td>
+			      <td class="text-center" th:text="${c.email}"></td>
+			      <td class="text-center" th:text="${c.phone}"></td>
+			      <td class="text-center" th:if="${session.key}">
+			      	<form th:action="@{'/user/add-contact/'+${c.cId}}" method="post">
+			      	<button type="submit" class="btn btn-outline-success btn-sm"><i class="fas fa-edit"></i>Accept</button>
+			      	</form>
+			      </td>
+			      <td class="text-center" th:if="${session.key}">
+			      <a type="button" class="btn btn-outline-danger btn-sm" th:onclick="|deleteContacts(${c.cId})|" ><i class="far fa-trash-alt"></i>Ignore</a>
+			      </td>
+			    </tr>
+			  </tbody>
+			</table>
+			
+			<!-- pagination -->
+			<nav aria-label="Page navigation example">
+  <ul class="pagination" th:if="${totalPages>=1}">
+    <li th:if="${currentPage > 0}" class="page-item">
+      <a class="page-link" href="#" th:href="@{'/user/show-contacts/'+${currentPage-1}}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li th:if="${currentPage<totalPages}" class="page-item" th:each="i : ${#numbers.sequence(1,totalPages)}" th:classappend="${currentPage == i-1 ? 'active':''}"><a th:href="@{'/user/show-contacts/'+${i-1}}" class="page-link" href="#"><span th:text="${i}"></span></a></li>
+    <li th:if="${currentPage+1 < totalPages}" class="page-item">
+      <a class="page-link" th:href="@{'/user/show-contacts/'+${currentPage+1}}" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+		</div>
+		</div>
+		<div class="container text-center mt-5 mb-5" th:if="${totalPages == 0}">
+			<h1 class="text-dark">No Requests Found !</h1>
+		</div>
+		<div class="text-center my-3">
+				<label>Share this URL to make more contacts :</label>
+				<p>Check Request Section to manage requests</p>
+			<div th:text="|http://localhost:1200/${email}/sendrequest|" class="text-info">
+			</div>
+				</div>
+	</div>
+	<script>
+$(document).ready(()=>{
+	$(".item").removeClass("active1");
+	$("#request-link").addClass("active1");
+});
+function deleteContacts(cid){
+	
+	swal({
+		  title: "Are you sure?",
+		  text: "Once Ignored, you will not be able to recover this contact!",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  swal("Contact has been deleted!", {
+			      icon: "success",
+			      buttons:false
+			    })
+			    setTimeout(function(){window.location="/user/deletes/"+cid;}, 1000);
+		  } else { 
+		    swal("Your Contact is safe!",{icon: "success",button:false});
+		    setTimeout(function(){ swal.close(); }, 1000);
+		  }
+		});
+}
+</script>
+</section>
+</body>
+</html>
