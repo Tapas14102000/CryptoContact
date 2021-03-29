@@ -69,14 +69,14 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		<!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> 
-			<scope>runtime</scope> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+		<!-- <dependency> <groupId>org.postgresql</groupId> <artifactId>postgresql</artifactId> 
+			</dependency> -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -98,14 +98,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			 <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
-            </configuration>
-        </plugin>
 		</plugins>
 	</build>
 
