@@ -11,7 +11,7 @@
 </head>
 <body>
 	<section>
-		<div class="card mr-3 mt-3" th:if="${session.key}">
+		<div class="card mr-3 mt-3">
 			<div th:if="${session.message}" class="container mt-3">
 				<div th:classappend="${'alert-'+session.message.type}"
 					class="alert text-center" role="alert"
@@ -27,6 +27,17 @@
 							<form action="#" th:object="${contact}"
 								enctype="multipart/form-data" method="post"
 								th:action="@{/process-contact}" class="mt-2">
+								
+								<div class="container text-center">
+								 <img
+										style="width: 250px; height: 250px;"
+										class="img-fluid profile_picture mt-3" src="/img/contact.png">
+								</div>
+								<div class="custom-file mt-3 mb-3 text-center">
+									<label>Upload Photo</label> <br> <input type="file"
+										name="profileImage">
+								</div>
+								
 								<!-- First Name -->
 								<div class="input-group mb-3">
 									<div class="input-group-prepend">
@@ -101,7 +112,7 @@
 </div>
  -->
 								<div class="container text-center mt-3 mb-3">
-									<button class="btn btn-outline-primary">Send Request</button>
+									<button class="btn btn-outline-primary" >Send Request</button>
 								</div>
 
 							</form>

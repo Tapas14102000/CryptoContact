@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -25,8 +28,6 @@ public class User {
 	private String name;
 	@NotBlank(message = "Email is required")
 	@Column(unique = true)
-	// @Email(regexp="^[a-z0-9+_.-]+@[a-z0-9.-]+$",message = "Enter a valid mail
-	// ID")
 	private String email;
 	@NotBlank(message = "Password is required")
 	private String password;
@@ -37,7 +38,16 @@ public class User {
 	private String about;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
 	private List<Contact> contacts = new ArrayList<>();
-
+	//@NotBlank(message = "Key is most vital data!<required>")
+	//@Size(min=3 ,message = "Key length should be atleast 3")
+	//@Email(regexp="(?=^.{8,}$)(?=.*\\d)(?=.*[!@#$%^&*]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$",message = "Key should have atleast 2 uppercase,1 special character,2 digits,3 lower case character")
+	/*
+	 * @Transient private String key;
+	 * 
+	 * public String getKey() { return key; }
+	 * 
+	 * public void setKey(String key) { this.key = key; }
+	 */
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role

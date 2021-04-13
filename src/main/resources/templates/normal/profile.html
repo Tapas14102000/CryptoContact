@@ -12,7 +12,7 @@
 			<div class="card ">
 				<div class="card-body text-center">
 				<div th:if="${session.key}" >
-						<form th:action="@{/user/update-contact-user}" method="post" class="mt-2" style="padding-left: 95%;">
+						<form th:action="@{/user/update-contact-user}" method="get" class="mt-2" style="padding-left: 95%;">
 			      	<button type="submit" class="btn btn-outline-success btn-sm"><i class="fas fa-edit"></i></button>
 			      	</form>
 					</div>

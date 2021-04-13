@@ -17,7 +17,7 @@
 							th:onclick="|deleteContact(${c.cId})|"><i
 							class="far fa-trash-alt"></i></a>
 						<form th:action="@{'/user/update-contact/'+${c.cId}}"
-							method="post" class="mt-2">
+							method="get" class="mt-2">
 							<button type="submit" class="btn btn-outline-success btn-sm">
 								<i class="fas fa-edit"></i>
 							</button>

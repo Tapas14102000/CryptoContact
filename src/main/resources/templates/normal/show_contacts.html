@@ -53,7 +53,7 @@
 			      <a type="button" th:if="${session.key}" class="btn btn-outline-primary btn-sm" th:href="@{'/user/'+${c.name}+'/contact/'+${c.cId}}"><i class="far fa-eye"></i></a>
 			      </td>
 			      <td class="text-center" th:if="${session.key}">
-			      	<form th:action="@{'/user/update-contact/'+${c.cId}}" method="post">
+			      	<form th:action="@{'/user/update-contact/'+${c.cId}}" method="get">
 			      	<button type="submit" class="btn btn-outline-success btn-sm"><i class="fas fa-edit"></i></button>
 			      	</form>
 			      </td>

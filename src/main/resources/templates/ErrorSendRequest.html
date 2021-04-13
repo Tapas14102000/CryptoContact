@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title th:text="${title}">Insert title here</title>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+	crossorigin="anonymous">
+</head>
+<body>
+	<section>
+		<div class="card my-5">
+			<div class="container text-center mt-5 mb-5">
+				<p class="bg-danger text-white">Unable to Send Request, Please Send request again! </p>
+			</div>
+		</div>
+	</section>
+	<script type="text/javascript" th:src="@{/JS/script.js}"></script>
+</body>
+</html>

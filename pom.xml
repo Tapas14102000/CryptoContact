@@ -20,6 +20,12 @@
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -69,6 +75,8 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -90,6 +98,7 @@
 			<artifactId>jasypt</artifactId>
 			<version>1.9.3</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>

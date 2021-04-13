@@ -119,3 +119,14 @@ function updatePaymentOnServer(payment_id,order_id,status){
 			},
 		});
 }
+
+function myfun(){
+		console.log("working");
+		 swal("Request Sent Successfully!", {
+		      icon: "success",
+		      buttons:false
+		    });
+		    setTimeout(function(){ swal.close(); }, 1000);
+	}
+	
+	

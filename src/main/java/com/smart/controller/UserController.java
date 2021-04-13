@@ -53,15 +53,21 @@ public class UserController {
 	private MyOrderRepository myOrderRepository;
 
 	@ModelAttribute // this will work for every handler
-	public void addCommomData(Model m, Principal principal) {
-		String Username = principal.getName();
+	public void addCommomData(Model m, HttpSession s) {
+		String Username = null;
+		if (s.getAttribute("email") != null)
+			Username = s.getAttribute("email").toString();
 		User user = userRepository.getUserByUserName(Username);
 		m.addAttribute("user", user);
-		m.addAttribute("email", principal.getName());
+		m.addAttribute("email", Username);
 	}
+
 	// open add form handler
 	@GetMapping("/add-contact")
-	public String openAddContactForm(Model m) {
+	public String openAddContactForm(Model m, Principal p) {
+		if (p == null) {
+			return "redirect:/signin?logout";
+		}
 		m.addAttribute("title", "Add Contact");
 		m.addAttribute("contact", new Contact());
 		return "normal/add_contact_form";
@@ -75,13 +81,16 @@ public class UserController {
 	}
 
 	@PostMapping("/process-contact")
-	public String processContact(@Valid @ModelAttribute Contact contact, Model m, Principal principal,
-			HttpSession session) {
+	public String processContact(@Valid @ModelAttribute Contact contact, Model m, HttpSession session, Principal p) {
+		if (p == null) {
+			return "redirect:/signin?logout";
+		}
 		try {
+			String email = session.getAttribute("email").toString();
 			StrongTextEncryptor ste = new StrongTextEncryptor();
 			ste.setPassword((String) session.getAttribute("key"));
-			User user = this.userRepository.getUserByUserName(principal.getName());
-			System.out.println(principal.getName());
+			User user = this.userRepository.getUserByUserName(email);
+			System.out.println();
 			contact.setUser(user);
 			System.out.println("contact.getPhone() : " + contact.getPhone());
 			System.out.println("key = " + (String) session.getAttribute("key"));
@@ -107,11 +116,15 @@ public class UserController {
 	// per page=5 contacts
 	// current page =0
 	@GetMapping("/show-contacts/{page}")
-	public String showContacts(@PathVariable("page") Integer page, Model m, Principal principal) {
+	public String showContacts(@PathVariable("page") Integer page, Model m, HttpSession session, Principal p) {
+		if (p == null) {
+			return "redirect:/signin?logout";
+		}
+		String email = session.getAttribute("email").toString();
 		m.addAttribute("title", "Contacts");
 		Pageable pageable = PageRequest.of(page, 6);
 		Page<Contact> contacts = this.contactRepository
-				.findContactByUser(this.userRepository.getUserByUserName(principal.getName()).getId(), pageable);
+				.findContactByUser(this.userRepository.getUserByUserName(email).getId(), pageable);
 		m.addAttribute("contacts", contacts);
 		m.addAttribute("currentPage", page);
 		m.addAttribute("totalPages", contacts.getTotalPages());
@@ -120,11 +133,15 @@ public class UserController {
 	}
 
 	@GetMapping("/request-contact/{page}")
-	public String showrequest(@PathVariable("page") Integer page, Model m, Principal principal) {
+	public String showrequest(@PathVariable("page") Integer page, Model m, HttpSession session, Principal p) {
+		if (p == null) {
+			return "redirect:/signin?logout";
+		}
+		String email = session.getAttribute("email").toString();
 		m.addAttribute("title", "Contacts");
 		Pageable pageable = PageRequest.of(page, 6);
 		Page<Contact> contacts = this.contactRepository
-				.findContactByUserRequest(this.userRepository.getUserByUserName(principal.getName()).getId(), pageable);
+				.findContactByUserRequest(this.userRepository.getUserByUserName(email).getId(), pageable);
 		m.addAttribute("contacts", contacts);
 		m.addAttribute("currentPage", page);
 		m.addAttribute("totalPages", contacts.getTotalPages());
@@ -134,16 +151,19 @@ public class UserController {
 
 	// show particular contact details
 	@RequestMapping("/{name}/contact/{cId}")
-	public String showcontact(@PathVariable("name") String name, @PathVariable("cId") Integer cId, Model m, Principal p,
-			HttpSession session) {
+	public String showcontact(@PathVariable("name") String name, @PathVariable("cId") Integer cId, Model m,
+			HttpSession session, Principal p) {
+		if (p == null) {
+			return "redirect:/signin?logout";
+		}
+		String email = session.getAttribute("email").toString();
 		m.addAttribute("title", name + " Details");
 		StrongTextEncryptor ste = new StrongTextEncryptor();
-
 		try {
 			ste.setPassword((String) session.getAttribute("key"));
 			Optional<Contact> contactOptional = this.contactRepository.findById(cId);
 			Contact contact = contactOptional.get();
-			User user = this.userRepository.getUserByUserName(p.getName());
+			User user = this.userRepository.getUserByUserName(email);
 			if (user.getId() == contact.getUser().getId()) {
 				contact.setEmail(ste.decrypt(contact.getEmail()));
 				contact.setWork(ste.decrypt(contact.getWork()));
@@ -156,12 +176,16 @@ public class UserController {
 	}
 
 	@GetMapping("/delete/{cId}")
-	public String DeleteContact(@PathVariable("cId") Integer cId, Model m, Principal p, HttpSession session) {
+	public String DeleteContact(@PathVariable("cId") Integer cId, Model m, HttpSession session, Principal p) {
+		if (p == null) {
+			return "redirect:/signin?logout";
+		}
 		try {
+			String email = session.getAttribute("email").toString();
 			System.out.println("\n\ncid=" + cId);
 			Optional<Contact> contactOptional = this.contactRepository.findById(cId);
 			Contact contact = contactOptional.get();
-			User user = this.userRepository.getUserByUserName(p.getName());
+			User user = this.userRepository.getUserByUserName(email);
 			if (user.getId() == contact.getUser().getId()) {
 				contact.setUser(null);
 				String x = contact.getcId() + contact.getImage();
@@ -179,12 +203,16 @@ public class UserController {
 
 	// delete requests
 	@GetMapping("/deletes/{cId}")
-	public String deleteContact(@PathVariable("cId") Integer cId, Model m, Principal p, HttpSession session) {
+	public String deleteContact(@PathVariable("cId") Integer cId, Model m, HttpSession session, Principal p) {
+		if (p == null) {
+			return "redirect:/signin?logout";
+		}
 		try {
+			String email = session.getAttribute("email").toString();
 			System.out.println("\n\ncid=" + cId);
 			Optional<Contact> contactOptional = this.contactRepository.findById(cId);
 			Contact contact = contactOptional.get();
-			User user = this.userRepository.getUserByUserName(p.getName());
+			User user = this.userRepository.getUserByUserName(email);
 			if (user.getId() == contact.getUser().getId()) {
 				contact.setUser(null);
 				String x = contact.getcId() + contact.getImage();
@@ -201,23 +229,38 @@ public class UserController {
 	}
 
 	// open update form handler for contacts
-	@PostMapping("/update-contact/{cId}")
-	public String updateForm(@PathVariable("cId") Integer cId, Model m, HttpSession session) {
-		StrongTextEncryptor ste = new StrongTextEncryptor();
-		ste.setPassword((String) session.getAttribute("key"));
-		m.addAttribute("title", "Update contact");
-		Contact contact = this.contactRepository.findById(cId).get();
-		contact.setEmail(ste.decrypt(contact.getEmail()));
-		contact.setWork(ste.decrypt(contact.getWork()));
-		contact.setPhone(ste.decrypt(contact.getPhone()));
-		contact.setAdded(true);
-		m.addAttribute("contact", contact);
+	@GetMapping("/update-contact/{cId}")
+	public String updateForm(@PathVariable("cId") Integer cId, Model m, HttpSession session, Principal p) {
+		if (p == null) {
+			return "redirect:/signin?logout";
+		}
+		try {
+			String email = session.getAttribute("email").toString();
+			StrongTextEncryptor ste = new StrongTextEncryptor();
+			ste.setPassword((String) session.getAttribute("key"));
+			m.addAttribute("title", "Update contact");
+			Optional<Contact> contactOptional = this.contactRepository.findById(cId);
+			Contact contact = contactOptional.get();
+			User user = this.userRepository.getUserByUserName(email);
+			if (user.getId() == contact.getUser().getId()) {
+				contact.setEmail(ste.decrypt(contact.getEmail()));
+				contact.setWork(ste.decrypt(contact.getWork()));
+				contact.setPhone(ste.decrypt(contact.getPhone()));
+				contact.setAdded(true);
+				m.addAttribute("contact", contact);
+			}
+		} catch (Exception e) {
+			m.addAttribute("contact", null);
+		}
 		return "normal/update_form";
 	}
 
 	// accept request
 	@PostMapping("/add-contact/{cId}")
-	public String addrequest(@PathVariable("cId") Integer cId, Model m, HttpSession session) {
+	public String addrequest(@PathVariable("cId") Integer cId, Model m, HttpSession session, Principal p) {
+		if (p == null) {
+			return "redirect:/signin?logout";
+		}
 		StrongTextEncryptor ste = new StrongTextEncryptor();
 		ste.setPassword((String) session.getAttribute("key"));
 		Contact contact = this.contactRepository.findById(cId).get();
@@ -232,8 +275,12 @@ public class UserController {
 	// update contact handler
 	@PostMapping("/process-update")
 	public String updateHandler(@ModelAttribute Contact contact, Model m,
-			@RequestParam("profileImage") MultipartFile file, HttpSession session, Principal principal) {
+			@RequestParam("profileImage") MultipartFile file, HttpSession session, Principal p) {
+		if (p == null) {
+			return "redirect:/signin?logout";
+		}
 		StrongTextEncryptor ste = new StrongTextEncryptor();
+		String email = session.getAttribute("email").toString();
 		try {
 			Contact contact1 = this.contactRepository.findById(contact.getcId()).get();
 			if (!file.isEmpty()) {
@@ -254,7 +301,7 @@ public class UserController {
 				System.out.println("file not changed");
 				contact.setImage(contact1.getImage());
 			}
-			User user = this.userRepository.getUserByUserName(principal.getName());
+			User user = this.userRepository.getUserByUserName(email);
 			contact.setUser(user);
 			ste.setPassword((String) session.getAttribute("key"));
 			contact.setEmail(ste.encrypt(contact.getEmail()));
@@ -269,12 +316,15 @@ public class UserController {
 	}
 
 	@PostMapping("/check-key")
-	public String secretkey(@RequestParam("key") String key, Principal p, HttpSession session) {
+	public String secretkey(@RequestParam("key") String key, Model m, HttpSession session, Principal p) {
+		if (p == null) {
+			return "redirect:/signin?logout";
+		}
 		StrongTextEncryptor ste = new StrongTextEncryptor();
+		String email = session.getAttribute("email").toString();
 		ste.setPassword(key);
 		try {
-			System.out.println("p.getname() => " + p.getName());
-			User user = this.userRepository.getUserByUserName(p.getName());
+			User user = this.userRepository.getUserByUserName(email);
 			ste.decrypt(user.getAbout());
 			System.out.println("valid key");
 			session.setAttribute("key", key);
@@ -286,8 +336,12 @@ public class UserController {
 	}
 
 	@GetMapping("/profile")
-	public String yourProfile(Model m, Principal p, HttpSession session) {
-		User user = this.userRepository.getUserByUserName(p.getName());
+	public String yourProfile(Model m, HttpSession session, Principal p) {
+		if (p == null) {
+			return "redirect:/signin?logout";
+		}
+		String email = session.getAttribute("email").toString();
+		User user = this.userRepository.getUserByUserName(email);
 		m.addAttribute("title", user.getName());
 		if (session.getAttribute("key") != null) {
 			StrongTextEncryptor ste = new StrongTextEncryptor();
@@ -299,9 +353,13 @@ public class UserController {
 	}
 
 	// open handler for user
-	@PostMapping("/update-contact-user")
-	public String updateFormUser(Model m, Principal p, HttpSession session) {
-		User user = this.userRepository.getUserByUserName(p.getName());
+	@GetMapping("/update-contact-user")
+	public String updateFormUser(Model m, HttpSession session, Principal p) {
+		if (p == null) {
+			return "redirect:/signin?logout";
+		}
+		String email = session.getAttribute("email").toString();
+		User user = this.userRepository.getUserByUserName(email);
 		m.addAttribute("title", "Update " + user.getName());
 		StrongTextEncryptor ste = new StrongTextEncryptor();
 		ste.setPassword((String) session.getAttribute("key"));
@@ -313,9 +371,10 @@ public class UserController {
 	// update contact handler
 	@PostMapping("/process-update-user")
 	public String updateHandlerUser(@ModelAttribute User user, Model m,
-			@RequestParam("profileImages") MultipartFile file, HttpSession session, Principal principal) {
+			@RequestParam("profileImages") MultipartFile file, HttpSession session, Principal p) {
+		String email = session.getAttribute("email").toString();
 		try {
-			User user1 = this.userRepository.getUserByUserName(principal.getName());
+			User user1 = this.userRepository.getUserByUserName(email);
 			if (!file.isEmpty()) {
 				System.out.println("file changed");
 				// delete old photo and update new one
@@ -341,16 +400,20 @@ public class UserController {
 			user.setAbout(ste.encrypt(user1.getAbout()));
 			user.setId(user1.getId());
 			user.setRole(user1.getRole());
+			System.out.println(user1);
 			this.userRepository.save(user);
+
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println(e);
 		}
 		return "redirect:/user/profile";
 	}
 
 	@PostMapping("/create_order")
 	@ResponseBody
-	public String createOrder(@RequestBody Map<String, Object> data, Principal p) throws RazorpayException {
+	public String createOrder(@RequestBody Map<String, Object> data, HttpSession session) throws RazorpayException {
+		String email = session.getAttribute("email").toString();
 		int amt = Integer.parseInt(data.get("amount").toString());
 		var client = new RazorpayClient("rzp_test_uV08rR1BPLKQA1", "9Wfqm1tVT98x8ffqroXxMCVp");
 		JSONObject options = new JSONObject();
@@ -364,7 +427,7 @@ public class UserController {
 		order1.setOrderId(order.get("id"));
 		order1.setPaymentId(null);
 		order1.setStatus("created");
-		order1.setUser(this.userRepository.getUserByUserName(p.getName()));
+		order1.setUser(this.userRepository.getUserByUserName(email));
 		order1.setReceipt(order.get("receipt"));
 		this.myOrderRepository.save(order1);
 		return order.toString();
