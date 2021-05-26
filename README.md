@@ -8,70 +8,92 @@ The datas that our user provides us are stored in encrypted format to which only
 
 <h1>Home page</h1>
 
-![image](https://user-images.githubusercontent.com/53347922/111899810-c1e79e00-8a54-11eb-882c-910e6a0b7f6d.png)
-![image](https://user-images.githubusercontent.com/53347922/111899834-f65b5a00-8a54-11eb-910a-be61be58cbe1.png)
-![image](https://user-images.githubusercontent.com/53347922/111899839-0a06c080-8a55-11eb-953e-8a27bb98c5c8.png)
+![image](https://user-images.githubusercontent.com/53347922/119658278-92855100-be4a-11eb-8f94-519f5a5f7083.png)
+![image](https://user-images.githubusercontent.com/53347922/119658215-813c4480-be4a-11eb-99ea-4ab48880399a.png)
+![image](https://user-images.githubusercontent.com/53347922/119658125-68cc2a00-be4a-11eb-8711-c4ffc16165c8.png)
 
 <h1>Register Page</h1>
 
-![image](https://user-images.githubusercontent.com/53347922/111899864-2b67ac80-8a55-11eb-80cf-cd941f4a9539.png)
+![image](https://user-images.githubusercontent.com/53347922/119658370-b052b600-be4a-11eb-80c0-a6f962db36fc.png)
 
 <h1>Sign In Page</h1>
 
-![image](https://user-images.githubusercontent.com/53347922/111899891-6073ff00-8a55-11eb-81bd-429061d499f4.png)
+![image](https://user-images.githubusercontent.com/53347922/119658426-c19bc280-be4a-11eb-8553-7a2fc0ceecbe.png)
 
 <h1>Decrypt your data </h1>
 
-![image](https://user-images.githubusercontent.com/53347922/111899927-a204aa00-8a55-11eb-847e-52027067894d.png)
+![image](https://user-images.githubusercontent.com/53347922/119658778-25be8680-be4b-11eb-90e8-f83a5944dd11.png)
 
 <h1>if you are the owner <Valid key> :</h1>
 
 <h2>User Profile Page : click on edit icon to edit your(user) details  </h2>
 
-![image](https://user-images.githubusercontent.com/53347922/111900086-73d39a00-8a56-11eb-873c-5142656f1d62.png)
+![image](https://user-images.githubusercontent.com/53347922/119659114-7cc45b80-be4b-11eb-8c7b-7413b89bf267.png)
 
 <h1>User Contacts : </h1>
-<br>
+
     1. click on eye icon to see the decrypted details of particular contact  
-    <br>
     2. click on edit icon to edit the details of particular contact  
-    <br>
     3. click on delete icon to delete the particular contact  
-    <br>
     4. You can directly search your contacts from the search provided at the top
 
-![image](https://user-images.githubusercontent.com/53347922/111900675-eabe6200-8a59-11eb-90fe-a048d266bf2c.png)
+![image](https://user-images.githubusercontent.com/53347922/119661597-12f98100-be4e-11eb-86fe-b33a21ec46f4.png)
 
 <h1>Add contact Page</h1>
+    
+    one can find a link at the bottom of this page that he/she can share
+    with any person to get their details by themselves only.
 
-![image](https://user-images.githubusercontent.com/53347922/111900723-35d87500-8a5a-11eb-8405-7f03cf73a002.png)
+![image](https://user-images.githubusercontent.com/53347922/119661911-69ff5600-be4e-11eb-8809-2d88b58027e7.png)
+    
+<h1>Request Form</h1>
+    
+    here anyone can send a add contact request
+    
+![image](https://user-images.githubusercontent.com/53347922/119664695-396ceb80-be51-11eb-98db-0e8dafef7797.png)
 
-<h2>if you are not the owner <Not Valid Key>  : By the way this case will not gonna happen because we believe on our security :)</h2>
+<h1>Request Page</h1>
+    
+    either you can accept the request or reject it based upon your choice
 
-you will be not allowed to enjoy any of our services. :(
+![image](https://user-images.githubusercontent.com/53347922/119667767-36272f00-be54-11eb-9aec-0eba6b1dd73c.png)
+
+    
+<h2>if you are not the owner <Not Valid Key>  :</h2>
+
+    you will be not allowed to enjoy any of our services. :(
 
 <h2>User Profile Page</h2>
-<br>    1. can't edit anymore :(
-<br>
+    
+    can't edit anymore :(
 
-![image](https://user-images.githubusercontent.com/53347922/111900855-d464d600-8a5a-11eb-8985-f5240886e655.png)
+![image](https://user-images.githubusercontent.com/53347922/119668959-4095f880-be55-11eb-80c1-0999cda6fac8.png)
 
-<h2>User contact Page : Enjoy the encrypted data :)</h2>
-<br>    1.can't edit,view,delete the contacts :(<br>
+<h2>User contact Page : </h2>
 
-![image](https://user-images.githubusercontent.com/53347922/111900884-fc543980-8a5a-11eb-9278-750026b2e41d.png)
+    can't edit,view,delete the contacts :(
 
-<h2>Add contact : this is a level up security provided by us.</h2>
+![image](https://user-images.githubusercontent.com/53347922/119669554-c6b23f00-be55-11eb-9eb9-b02aad90ee99.png)
 
-![image](https://user-images.githubusercontent.com/53347922/111900964-6240c100-8a5b-11eb-8226-6f94b0b55850.png)
+<h2>Add contact :</h2>
+    
+    can't add contacts
 
-<h1>Payment Integration : Donate us without any hesitation because we believe in our top security. </h1>
+![image](https://user-images.githubusercontent.com/53347922/119669784-f3feed00-be55-11eb-99b5-ad03701ec84c.png)
 
-![image](https://user-images.githubusercontent.com/53347922/111901199-84870e80-8a5c-11eb-9492-611cba14ade0.png)
+<h2>Request Page</h2>    
+
+    can't accept or reject any request recieved
+    
+![image](https://user-images.githubusercontent.com/53347922/119670264-61ab1900-be56-11eb-9a57-60cf7acf7b3c.png)
+  
+<h1>Payment Integration :</h1>
+
+![image](https://user-images.githubusercontent.com/53347922/119672263-12fe7e80-be58-11eb-8d4a-ed79ddc45587.png)
 
 <h1>Thanks for your contribution :)</h1>
 
-![image](https://user-images.githubusercontent.com/53347922/111901209-8fda3a00-8a5c-11eb-8821-9639fd718ef5.png)
+![image](https://user-images.githubusercontent.com/53347922/119672307-1eea4080-be58-11eb-989e-b54e187ee82b.png)
 
 
 <br><br><br>
