@@ -1,5 +1,5 @@
-# SmartContactManager
-A very efficient way of managing your contacts in a very secured way. 
+# CryptoContact
+A very efficient way of managing your contacts in a very secured environment. 
 
 This application is built to provide our user an experience of our excellent UI design and storing and accessing their contacts in a very secured way.
 Security is the main reason that makes this website different from others.
